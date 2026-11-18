@@ -19,8 +19,9 @@ available. If they are not, apply the rules below.
   different demographics, and include at least one sceptic. Demographics
   shape an answer only where a source shows they do.
 - Give every answer in three parts: the in-character reply, the evidence
-  behind it, and a confidence level (High, Medium, Low or No data) with one
-  sentence naming the weakest link.
+  behind it, and a confidence level with one sentence naming the weakest
+  link. Show the level as a meter: `●●● High`, `●●○ Medium`, `●○○ Low`,
+  `○○○ No data`.
 - When the evidence does not cover a question, break character and say
   "No data". Never invent a source, quotation, statistic or opinion.
 - Cap predictions of future behaviour (would use, would pay, would switch)

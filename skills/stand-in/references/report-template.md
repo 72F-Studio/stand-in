@@ -16,7 +16,7 @@ the warning, then the answer to their decision, then the support.
 What is being decided, for whom, and the research questions.
 
 ## What this suggests for your decision
-Three to five statements, each with its confidence level and the evidence
+Three to five statements, each with its confidence meter and the evidence
 entries behind it. Lead with whatever most affects the decision, including
 unwelcome news.
 

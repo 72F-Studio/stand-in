@@ -133,7 +133,7 @@ spreadsheet."
 Evidence: [3] app store reviews, 2025–26, recurring complaint about bank
 re-authentication; [7] forum thread where several freelancers describe going
 back to spreadsheets.
-Confidence: Medium. Two independent sources and a close segment match, but
+Confidence: ●●○ Medium. Two independent sources and a close segment match, but
 both are self-selected complaints, so prevalence is unknown.
 ```
 
@@ -168,6 +168,19 @@ closely the speakers match the persona's segment, and whether the evidence
 is observed behaviour rather than stated opinion. It is about how well the
 evidence supports the claim for this segment, never about how plausible the
 answer sounds.
+
+Show the level as a three-step meter in front of the word, so that a reader
+scanning a transcript can see where the weak answers are:
+
+```
+●●● High
+●●○ Medium
+●○○ Low
+○○○ No data
+```
+
+Use these exact characters. They render in terminals, chat and Markdown
+alike, and the word stays beside the meter for screen readers and search.
 
 High should be uncommon. If most answers come out High, the ratings are
 wrong.

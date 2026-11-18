@@ -74,10 +74,10 @@ Rate the claim for the persona's segment, not the topic in general.
 
 | Level | Requires |
 | --- | --- |
-| **High** | Three or more independent sources of at least two types, including behavioural or representative data; recent; speakers clearly match the segment; no substantial contradicting evidence |
-| **Medium** | Two or more independent sources that agree, with a reasonable segment match; or one strong representative source. Prevalence may be unknown |
-| **Low** | A single source, an anecdotal thread, a loose segment match, dated material, conflicting evidence, or inference from adjacent behaviour |
-| **No data** | Nothing retrieved bears on the question. Say so; do not answer in character |
+| ●●● **High** | Three or more independent sources of at least two types, including behavioural or representative data; recent; speakers clearly match the segment; no substantial contradicting evidence |
+| ●●○ **Medium** | Two or more independent sources that agree, with a reasonable segment match; or one strong representative source. Prevalence may be unknown |
+| ●○○ **Low** | A single source, an anecdotal thread, a loose segment match, dated material, conflicting evidence, or inference from adjacent behaviour |
+| ○○○ **No data** | Nothing retrieved bears on the question. Say so; do not answer in character |
 
 Caps that override the table:
 
@@ -91,7 +91,7 @@ Caps that override the table:
 - Extrapolating to a demographic the sources do not show (another country,
   age group, income level): drop one level and say that you extrapolated.
 
-The reasoning sentence should name the weakest link, for example: "Medium.
+The reasoning sentence should name the weakest link, for example: "●●○ Medium.
 Three threads agree, but all are from one subreddit of power users."
 
 ## Known biases to state
