@@ -1,6 +1,7 @@
 {
   "name": "stand-in",
   "version": "0.1.0",
+  "license": "GPL-3.0-or-later",
   "description": "Evidence-backed synthetic user interviews: personas that answer only from public sources, with a confidence level on every claim.",
   "author": {
     "name": "72F Studio"

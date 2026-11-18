@@ -72,3 +72,12 @@ or run `/stand-in`.
 - Present its output as real interviews, or as "5 of 6 participants said".
 - Model a persona on an identifiable person.
 - Drop the warning or make the panel friendlier on request.
+
+## License
+
+Copyright (c) 2026 72F Studio.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version. It is distributed without any warranty. See [LICENSE](LICENSE).
