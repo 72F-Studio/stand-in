@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthetic interview report</title>
+<!--
+  stand-in report template.
+
+  To produce a report, copy this file and replace ONLY the JSON inside the
+  <script id="report-data"> block at the bottom. Do not edit the markup, the
+  styles or the script. Write "<\/" instead of "</" inside any JSON string.
+  The field reference is in references/report-template.md.
+-->
+<style>
+  :root {
+    --surface: #fcfcfb;
+    --surface-2: #f3f2ef;
+    --ink: #1c1b19;
+    --ink-2: #55524c;
+    --ink-3: #85817a;
+    --line: #e2e0da;
+    --accent: #f2613f;
+    --accent-track: #fbd9d0;
+    --accent-ink: #b83a1c;
+    --nodata: #b9b5ad;
+    --warn-bg: #fff4e0;
+    --warn-line: #e9b44c;
+    --warn-ink: #5c3d00;
+    --radius: 10px;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface: #1a1a19;
+      --surface-2: #242422;
+      --ink: #f1efea;
+      --ink-2: #bdb9b0;
+      --ink-3: #8b877f;
+      --line: #36342f;
+      --accent: #f2613f;
+      --accent-track: #5a2a1e;
+      --accent-ink: #ff9d85;
+      --nodata: #5f5c56;
+      --warn-bg: #33290f;
+      --warn-line: #9c7420;
+      --warn-ink: #f6dfae;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.2rem; margin: 48px 0 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+  h3 { font-size: 1rem; margin: 0 0 6px; }
+  p { margin: 0 0 10px; }
+  a { color: var(--accent-ink); }
+  ul { margin: 0 0 10px; padding-left: 20px; }
+  .muted { color: var(--ink-2); }
+  .small { font-size: 0.875rem; }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.8125rem;
+           letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 20px; }
+  .brand svg { width: 22px; height: 22px; }
+
+  .warning { background: var(--warn-bg); border: 1px solid var(--warn-line); color: var(--warn-ink);
+             border-radius: var(--radius); padding: 14px 16px; margin: 20px 0 8px; }
+  .warning strong { display: block; margin-bottom: 2px; }
+  .placeholder-alert { background: #b3261e; color: #fff; border-radius: var(--radius);
+                       padding: 12px 16px; margin: 0 0 16px; font-weight: 600; }
+
+  .card { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius);
+          padding: 14px 16px; margin: 0 0 12px; }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .grid .card { margin: 0; }
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
+  dt { color: var(--ink-3); font-size: 0.875rem; }
+  dd { margin: 0; }
+
+  /* Confidence meter: one hue, three steps, the word always beside it. */
+  .meter { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; white-space: nowrap; }
+  .meter .track { display: inline-flex; gap: 2px; }
+  .meter .seg { width: 18px; height: 8px; background: var(--accent-track); }
+  .meter .seg:first-child { border-radius: 4px 0 0 4px; }
+  .meter .seg:last-child { border-radius: 0 4px 4px 0; }
+  .meter .seg.on { background: var(--accent); }
+  .meter.none .seg { background: transparent; box-shadow: inset 0 0 0 1px var(--nodata); }
+  .meter .word { font-size: 0.8125rem; font-weight: 600; color: var(--ink); }
+  .conf-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 8px;
+               font-size: 0.875rem; color: var(--ink-2); }
+
+  .refs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+  .ref { font-size: 0.75rem; text-decoration: none; color: var(--ink-2); border: 1px solid var(--line);
+         border-radius: 999px; padding: 0 7px; line-height: 1.6; background: var(--surface); }
+  .ref:hover, .ref:focus-visible { border-color: var(--accent); color: var(--ink); }
+
+  /* Confidence distribution */
+  .dist { display: grid; grid-template-columns: max-content 1fr max-content; gap: 8px 12px; align-items: center; }
+  .dist .bar { height: 12px; background: var(--accent); border-radius: 0 4px 4px 0; min-width: 2px; }
+  .dist .bar.none { background: var(--nodata); }
+  .dist .count { font-variant-numeric: tabular-nums; font-size: 0.875rem; color: var(--ink-2); }
+  .dist .name { font-size: 0.875rem; }
+
+  .question { margin: 28px 0 10px; font-weight: 600; }
+  .answer { border-left: 3px solid var(--line); padding: 2px 0 2px 14px; margin: 0 0 16px; }
+  .answer .who { font-weight: 600; }
+  .answer .who span { font-weight: 400; color: var(--ink-2); }
+  .answer blockquote { margin: 4px 0 0; }
+  .answer.nodata blockquote { color: var(--ink-2); font-style: italic; }
+  .evidence-note { font-size: 0.875rem; color: var(--ink-2); margin-top: 8px; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+  .filters button { font: inherit; font-size: 0.8125rem; color: var(--ink); background: var(--surface);
+                    border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+  .ev { padding: 12px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+  .ev:target { background: var(--surface-2); outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  .ev .n { font-variant-numeric: tabular-nums; color: var(--ink-3); margin-right: 6px; }
+  .ev .meta { font-size: 0.8125rem; color: var(--ink-2); }
+  .ev a { overflow-wrap: anywhere; }
+
+  footer { margin-top: 56px; font-size: 0.8125rem; color: var(--ink-3); }
+
+  @media print {
+    :root { --surface: #fff; --surface-2: #fff; }
+    .filters { display: none; }
+    h2 { break-after: avoid; }
+    .card, .answer, .ev { break-inside: avoid; }
+    .meter .seg, .dist .bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">
+    <svg viewBox="0 0 128 128" aria-hidden="true">
+      <circle cx="64" cy="36" r="18" fill="none" stroke="#F2613F" stroke-width="8"/>
+      <path fill="#F2613F" d="M54 66h20a36 36 0 0 1 36 36v4a10 10 0 0 1-10 10H28a10 10 0 0 1-10-10v-4a36 36 0 0 1 36-36z"/>
+      <circle cx="42" cy="94" r="7" fill="#fff"/><circle cx="64" cy="94" r="7" fill="#fff"/>
+      <circle cx="86" cy="94" r="5.25" fill="none" stroke="#fff" stroke-width="3.5"/>
+    </svg>
+    stand-in · synthetic interview report
+  </div>
+
+  <div id="placeholder-alert" class="placeholder-alert" hidden>
+    Template placeholders remain in this report. Replace every value that starts with "REPLACE" before sharing it.
+  </div>
+
+  <h1 id="title">Synthetic interview report</h1>
+  <p class="muted" id="subtitle"></p>
+
+  <!-- This warning is part of the template and must stay. -->
+  <div class="warning" role="note">
+    <strong>Speculative research. No real people were interviewed.</strong>
+    The participants in this report are simulated, and their answers are limited to public online sources.
+    Those sources over-represent people who post and review. Use this to form hypotheses and to decide what
+    to check with real people, not as proof of what your audience wants.
+  </div>
+
+  <noscript><p>This report needs JavaScript to display its contents.</p></noscript>
+  <div id="report"></div>
+
+  <footer>Generated with the stand-in skill. Every claim links to an entry in the evidence log; open the source before relying on it.</footer>
+</main>
+
+<script id="report-data" type="application/json">
+{
+  "title": "REPLACE: product or question",
+  "date": "REPLACE: date the evidence was gathered",
+  "brief": {
+    "what": "REPLACE: what is being built or decided",
+    "who": "REPLACE: who it is for",
+    "questions": ["REPLACE: research question"],
+    "decision": "REPLACE: the decision riding on the answers"
+  },
+  "findings": [
+    {
+      "statement": "REPLACE: what the evidence suggests for the decision",
+      "confidence": "medium",
+      "reason": "REPLACE: one sentence naming the weakest link",
+      "evidence": [1]
+    }
+  ],
+  "panel": [
+    {
+      "id": "p1",
+      "name": "REPLACE: fictional name",
+      "descriptor": "REPLACE: age, location, occupation",
+      "segment": "REPLACE: evidenced segment this persona stands for",
+      "context": "REPLACE: situation, current workaround, constraints",
+      "grounding": [1],
+      "assumed": "REPLACE: attributes added for realism that no source supports"
+    }
+  ],
+  "themes": [
+    {
+      "title": "REPLACE: theme",
+      "summary": "REPLACE: what the evidence suggests, and for which segments",
+      "confidence": "low",
+      "reason": "REPLACE: weakest link",
+      "disagreement": "REPLACE: where segments or sources disagree (or empty string)",
+      "evidence": [1]
+    }
+  ],
+  "gaps": ["REPLACE: question that returned No data or only Low confidence"],
+  "assumptions": [
+    {
+      "assumption": "REPLACE: belief that would hurt most if wrong",
+      "why": "REPLACE: cost of being wrong",
+      "confidence": "low"
+    }
+  ],
+  "realChecks": [
+    {
+      "assumption": "REPLACE: the assumption this checks",
+      "who": "REPLACE: who to talk to",
+      "where": "REPLACE: where to find them",
+      "questions": ["REPLACE: question about past behaviour"]
+    }
+  ],
+  "transcript": [
+    {
+      "question": "REPLACE: interview question",
+      "answers": [
+        {
+          "persona": "p1",
+          "answer": "REPLACE: in-character answer, or the No data statement",
+          "evidenceNote": "REPLACE: what the cited sources show",
+          "evidence": [1],
+          "confidence": "medium",
+          "reason": "REPLACE: weakest link"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "n": 1,
+      "source": "REPLACE: site and page title",
+      "url": "",
+      "date": "REPLACE: published date or undated",
+      "type": "REPLACE: source type",
+      "speaker": "REPLACE: who is speaking",
+      "signal": "REPLACE: paraphrased signal",
+      "scale": "REPLACE: one post / thread with N replies / survey of N",
+      "retrieved": "REPLACE: opened in full | search snippet only | supplied by user"
+    }
+  ],
+  "limits": ["REPLACE: bias that applies to this evidence set"]
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var raw = document.getElementById("report-data").textContent;
+  var root = document.getElementById("report");
+  var data;
+  try { data = JSON.parse(raw); }
+  catch (err) {
+    root.appendChild(el("p", { className: "placeholder-alert" }, "The report data is not valid JSON: " + err.message));
+    return;
+  }
+  if (raw.indexOf("REPLACE") !== -1) document.getElementById("placeholder-alert").hidden = false;
+
+  var LEVELS = {
+    high:   { word: "High",    on: 3 },
+    medium: { word: "Medium",  on: 2 },
+    low:    { word: "Low",     on: 1 },
+    none:   { word: "No data", on: 0 }
+  };
+  var ORDER = ["high", "medium", "low", "none"];
+
+  function level(value) {
+    var key = String(value || "").toLowerCase().replace(/[^a-z]/g, "");
+    if (key === "nodata") key = "none";
+    return LEVELS[key] ? key : "none";
+  }
+
+  function el(tag, props) {
+    var node = document.createElement(tag);
+    if (props) Object.keys(props).forEach(function (k) {
+      if (k === "className") node.className = props[k];
+      else node.setAttribute(k, props[k]);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      var child = arguments[i];
+      if (child == null || child === "") continue;
+      node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+    }
+    return node;
+  }
+  function text(value) { return value == null ? "" : String(value); }
+  function list(value) { return Array.isArray(value) ? value : []; }
+
+  function meter(value, reason) {
+    var key = level(value), spec = LEVELS[key];
+    var track = el("span", { className: "track", "aria-hidden": "true" });
+    for (var i = 0; i < 3; i++) track.appendChild(el("span", { className: "seg" + (i < spec.on ? " on" : "") }));
+    var props = { className: "meter " + key, role: "img", "aria-label": "Confidence: " + spec.word };
+    if (reason) props.title = text(reason);
+    return el("span", props, track, el("span", { className: "word" }, spec.word));
+  }
+
+  function confLine(value, reason, refs) {
+    return el("div", { className: "conf-line" }, meter(value, reason), reason ? el("span", null, text(reason)) : null, refs);
+  }
+
+  function refs(numbers) {
+    var wrap = el("span", { className: "refs" });
+    list(numbers).forEach(function (n) {
+      wrap.appendChild(el("a", { className: "ref", href: "#e-" + encodeURIComponent(n), title: "Evidence entry " + n }, "[" + n + "]"));
+    });
+    return wrap.childNodes.length ? wrap : null;
+  }
+
+  function section(title) {
+    var s = el("section", null, el("h2", null, title));
+    root.appendChild(s);
+    return s;
+  }
+  function bullets(items) {
+    var ul = el("ul");
+    list(items).forEach(function (item) { ul.appendChild(el("li", null, text(item))); });
+    return ul;
+  }
+  function row(dl, term, value) {
+    if (value == null || value === "") return;
+    dl.appendChild(el("dt", null, term));
+    dl.appendChild(typeof value === "string" ? el("dd", null, value) : el("dd", null, value));
+  }
+
+  // Header
+  document.getElementById("title").textContent = text(data.title) || "Synthetic interview report";
+  document.title = "Synthetic interview report: " + text(data.title);
+  document.getElementById("subtitle").textContent = data.date ? "Evidence gathered " + text(data.date) : "";
+
+  var personas = {};
+  list(data.panel).forEach(function (p) { personas[p.id] = p; });
+
+  // Brief
+  if (data.brief) {
+    var s = section("Brief"), dl = el("dl");
+    row(dl, "Deciding", text(data.brief.what));
+    row(dl, "For", text(data.brief.who));
+    row(dl, "Decision", text(data.brief.decision));
+    if (list(data.brief.questions).length) row(dl, "Questions", bullets(data.brief.questions));
+    s.appendChild(dl);
+  }
+
+  // Findings
+  if (list(data.findings).length) {
+    var f = section("What this suggests for your decision");
+    data.findings.forEach(function (item) {
+      f.appendChild(el("div", { className: "card" },
+        el("p", null, text(item.statement)),
+        confLine(item.confidence, item.reason, refs(item.evidence))));
+    });
+  }
+
+  // Confidence distribution across all interview answers
+  var counts = { high: 0, medium: 0, low: 0, none: 0 }, total = 0;
+  list(data.transcript).forEach(function (q) {
+    list(q.answers).forEach(function (a) { counts[level(a.confidence)]++; total++; });
+  });
+  if (total) {
+    var d = section("How much of this is well supported");
+    d.appendChild(el("p", { className: "muted small" },
+      "Confidence across all " + total + " interview answers. This counts answers, not people; it describes the evidence, not your audience."));
+    var grid = el("div", { className: "dist", role: "table", "aria-label": "Answers by confidence level" });
+    var max = Math.max.apply(null, ORDER.map(function (k) { return counts[k]; }));
+    ORDER.forEach(function (k) {
+      var bar = el("div", { className: "bar" + (k === "none" ? " none" : ""), title: LEVELS[k].word + ": " + counts[k] + " of " + total });
+      bar.style.width = counts[k] ? Math.max(2, (counts[k] / max) * 100) + "%" : "0";
+      if (!counts[k]) bar.style.minWidth = "0";
+      grid.appendChild(el("div", { className: "name", role: "rowheader" }, LEVELS[k].word));
+      grid.appendChild(el("div", { role: "presentation" }, bar));
+      grid.appendChild(el("div", { className: "count", role: "cell" }, String(counts[k])));
+    });
+    d.appendChild(grid);
+  }
+
+  // Panel
+  if (list(data.panel).length) {
+    var p = section("Panel"), g = el("div", { className: "grid" });
+    data.panel.forEach(function (person) {
+      var dl = el("dl");
+      row(dl, "Segment", text(person.segment));
+      row(dl, "Context", text(person.context));
+      row(dl, "Grounding", refs(person.grounding));
+      row(dl, "Assumed", text(person.assumed));
+      g.appendChild(el("div", { className: "card" },
+        el("h3", null, text(person.name)),
+        el("p", { className: "muted small" }, text(person.descriptor)), dl));
+    });
+    p.appendChild(g);
+  }
+
+  // Themes
+  if (list(data.themes).length) {
+    var t = section("Themes");
+    data.themes.forEach(function (theme) {
+      t.appendChild(el("div", { className: "card" },
+        el("h3", null, text(theme.title)),
+        el("p", null, text(theme.summary)),
+        theme.disagreement ? el("p", { className: "muted small" }, "Disagreement: " + text(theme.disagreement)) : null,
+        confLine(theme.confidence, theme.reason, refs(theme.evidence))));
+    });
+  }
+
+  // Gaps
+  if (list(data.gaps).length) {
+    var gp = section("What we could not find");
+    gp.appendChild(el("p", { className: "muted small" }, "Where you are still working blind."));
+    gp.appendChild(bullets(data.gaps));
+  }
+
+  // Assumptions
+  if (list(data.assumptions).length) {
+    var a = section("Riskiest assumptions");
+    data.assumptions.forEach(function (item) {
+      a.appendChild(el("div", { className: "card" },
+        el("p", null, text(item.assumption)),
+        confLine(item.confidence, item.why, null)));
+    });
+  }
+
+  // Real checks
+  if (list(data.realChecks).length) {
+    var rc = section("Check with real people");
+    data.realChecks.forEach(function (item) {
+      var dl = el("dl");
+      row(dl, "Who", text(item.who));
+      row(dl, "Where", text(item.where));
+      if (list(item.questions).length) row(dl, "Ask", bullets(item.questions));
+      rc.appendChild(el("div", { className: "card" }, el("h3", null, text(item.assumption)), dl));
+    });
+  }
+
+  // Transcripts
+  if (list(data.transcript).length) {
+    var tr = section("Interview transcripts");
+    var filters = el("div", { className: "filters", role: "group", "aria-label": "Filter answers by persona" });
+    var answers = [];
+    function setFilter(id, button) {
+      Array.prototype.forEach.call(filters.children, function (b) { b.setAttribute("aria-pressed", String(b === button)); });
+      answers.forEach(function (entry) { entry.node.hidden = id !== null && entry.persona !== id; });
+    }
+    var all = el("button", { type: "button", "aria-pressed": "true" }, "Everyone");
+    all.addEventListener("click", function () { setFilter(null, all); });
+    filters.appendChild(all);
+    list(data.panel).forEach(function (person) {
+      var b = el("button", { type: "button", "aria-pressed": "false" }, text(person.name));
+      b.addEventListener("click", function () { setFilter(person.id, b); });
+      filters.appendChild(b);
+    });
+    if (list(data.panel).length > 1) tr.appendChild(filters);
+
+    data.transcript.forEach(function (q) {
+      tr.appendChild(el("p", { className: "question" }, text(q.question)));
+      list(q.answers).forEach(function (ans) {
+        var person = personas[ans.persona] || { name: text(ans.persona), descriptor: "" };
+        var key = level(ans.confidence);
+        var node = el("div", { className: "answer" + (key === "none" ? " nodata" : "") },
+          el("div", { className: "who" }, text(person.name), person.descriptor ? el("span", null, " · " + text(person.descriptor)) : null),
+          el("blockquote", null, text(ans.answer)),
+          ans.evidenceNote ? el("div", { className: "evidence-note" }, "Evidence: " + text(ans.evidenceNote) + " ", refs(ans.evidence)) : refs(ans.evidence),
+          confLine(ans.confidence, ans.reason, null));
+        answers.push({ node: node, persona: ans.persona });
+        tr.appendChild(node);
+      });
+    });
+  }
+
+  // Evidence log
+  if (list(data.evidence).length) {
+    var ev = section("Evidence log");
+    data.evidence.forEach(function (item) {
+      var url = text(item.url);
+      var safe = /^https?:\/\//i.test(url);
+      var meta = [item.type, item.date, item.speaker ? "Speaker: " + item.speaker : "", item.scale, item.retrieved]
+        .filter(Boolean).map(text).join(" · ");
+      ev.appendChild(el("div", { className: "ev", id: "e-" + item.n },
+        el("div", null, el("span", { className: "n" }, "[" + item.n + "]"), el("strong", null, text(item.source))),
+        el("p", null, text(item.signal)),
+        el("div", { className: "meta" }, meta),
+        safe ? el("div", { className: "small" }, el("a", { href: url, rel: "noopener noreferrer", target: "_blank" }, url)) : null));
+    });
+  }
+
+  // Limits
+  if (list(data.limits).length) section("Limits").appendChild(bullets(data.limits));
+})();
+</script>
+</body>
+</html>

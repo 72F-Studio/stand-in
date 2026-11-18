@@ -44,7 +44,8 @@ both are self-selected complaints, so prevalence is unknown.
    guide across the panel.
 5. **Report**: what the evidence suggests, what could not be found, the
    riskiest assumptions, and a short script for checking them with three to
-   five real people.
+   five real people. Saved as Markdown, or as a self-contained HTML page with
+   drawn confidence meters and citations linked to the evidence log.
 
 Confidence is High, Medium, Low or No data. Questions about future behaviour
 ("would you pay for this?") are capped at Low, because online text holds

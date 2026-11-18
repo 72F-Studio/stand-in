@@ -187,7 +187,7 @@ wrong.
 
 ### 6. Synthesise
 
-After the interviews, write a report using
+After the interviews, write a report following
 `references/report-template.md`. Lead with what bears on the user's
 decision. Separate what the evidence supports from what remains unknown, and
 finish with the cheapest way to check the riskiest assumptions with real
@@ -196,8 +196,17 @@ already written. The point of the synthetic round is to make those few real
 conversations sharply targeted, or to make an informed bet when even those
 are not possible.
 
-Save the report as a Markdown file when the user wants to keep it, with the
-full evidence log and links included so that anyone can audit a claim.
+When the user wants to keep or share the report, save it as a file with the
+full evidence log and links included, so that anyone can audit a claim:
+
+- **HTML** (preferred when you can write files): copy
+  `assets/report-template.html` and replace only the JSON inside its
+  `report-data` block. The template draws the confidence meters, links each
+  citation to its evidence entry, and carries the warning itself. Do not
+  edit its markup, styles or script. The fields are listed in
+  `references/report-template.md`.
+- **Markdown**: follow the outline in `references/report-template.md`, with
+  the text meters.
 
 ## Integrity rules
 

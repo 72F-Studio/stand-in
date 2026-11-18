@@ -59,3 +59,42 @@ The biases that apply to this particular evidence set.
 Wording throughout: "the evidence suggests", "sources for this segment
 report". Avoid "users said", "participants told us", percentages of the
 panel, or anything else that reads as a sampled study.
+
+## HTML report
+
+`assets/report-template.html` renders the same report as a single
+self-contained page, with drawn confidence meters, a summary of how many
+answers sit at each confidence level, a persona filter on the transcripts,
+and citations that jump to the evidence log. It works offline, in light and
+dark mode, and prints cleanly.
+
+To fill it, copy the file and replace the JSON in the
+`<script id="report-data">` block. Leave everything else untouched,
+including the warning banner. Rules for the JSON:
+
+- It must be valid JSON. Inside any string, write `<\/` in place of `</`.
+- Every string is shown as plain text; do not put HTML or Markdown in it.
+- Remove every `REPLACE:` placeholder. The page shows a red alert while any
+  remain.
+- Omit a section by giving it an empty list.
+
+| Field | Contents |
+| --- | --- |
+| `title`, `date` | Product or question; the date the evidence was gathered |
+| `brief` | `what`, `who`, `decision`, and a `questions` list |
+| `findings[]` | `statement`, `confidence`, `reason`, `evidence` |
+| `panel[]` | `id`, `name`, `descriptor`, `segment`, `context`, `grounding`, `assumed` |
+| `themes[]` | `title`, `summary`, `confidence`, `reason`, `disagreement`, `evidence` |
+| `gaps[]` | Strings: questions with No data or only Low confidence |
+| `assumptions[]` | `assumption`, `why`, `confidence` |
+| `realChecks[]` | `assumption`, `who`, `where`, and a `questions` list |
+| `transcript[]` | `question` and `answers[]`, each with `persona` (a panel `id`), `answer`, `evidenceNote`, `evidence`, `confidence`, `reason` |
+| `evidence[]` | `n`, `source`, `url`, `date`, `type`, `speaker`, `signal`, `scale`, `retrieved` |
+| `limits[]` | Strings: the biases that apply to this evidence set |
+
+`confidence` is one of `high`, `medium`, `low` or `none`. `evidence` and
+`grounding` are lists of evidence numbers, each matching an `n` in the
+evidence log. `url` must start with `http://` or `https://`; leave it empty
+when there is no link. For a No data answer, put the out-of-character
+statement in `answer`, set `confidence` to `none`, and use `reason` for what
+would answer the question.
