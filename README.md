@@ -78,6 +78,6 @@ or run `/stand-in`.
 Copyright (c) 2026 72F Studio.
 
 This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version. It is distributed without any warranty. See [LICENSE](LICENSE).
+the terms of the GNU General Public License version 3 as published by the Free
+Software Foundation. It is distributed without any warranty. See
+[LICENSE](LICENSE).
