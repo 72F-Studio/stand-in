@@ -44,7 +44,11 @@ Search in the audience's words, not the product's. Useful shapes:
 Run the disconfirming searches (switching, indifference) every time, not
 only when the first results look too rosy.
 
-Open the pages that matter instead of relying on snippets. Note the date:
+Open the pages that matter instead of relying on snippets. A snippet is
+someone else's summary and can be wrong: when you open the page, re-check
+every claim you took from the snippet and delete whatever the page does not
+support. If a site refuses automated access, do not disguise the client to
+get past it; cite the source as snippet-only and let the cap apply. Note the date:
 anything older than about three years is background unless the behaviour is
 slow-changing.
 
