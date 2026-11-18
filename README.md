@@ -40,12 +40,33 @@ both are self-selected complaints, so prevalence is unknown.
    not care.
 3. **Panel**: three to six personas drawn from segments found in the
    evidence, always including at least one sceptic.
-4. **Interview**: ask questions live, or let the agent run a discussion
-   guide across the panel.
+4. **Interview**, in one of two modes (below).
 5. **Report**: what the evidence suggests, the riskiest assumptions, and a
    verify-in-person checklist of everything the round could not meaningfully
    find, with who to ask and what to ask them. Saved as Markdown, or as a self-contained HTML page with
    drawn confidence meters and citations linked to the evidence log.
+
+## Two modes
+
+**Analysis**: the agent does everything. Give it the brief and it writes the
+questions, interviews the whole panel and hands back the report.
+
+```
+/stand-in analysis a habit tracker for shift workers
+```
+
+**Roleplay**: you are the interviewer. Pick a persona and ask your own
+questions; the agent answers in character, one question at a time, with the
+evidence and confidence under each answer. Say "switch to <name>", "ask
+everyone" or "wrap up" as you go. Useful for probing one persona in depth,
+or for practising an interview before a real one.
+
+```
+/stand-in roleplay a habit tracker for shift workers
+```
+
+Both modes follow the same rules, and both end with the verify-in-person
+list.
 
 Confidence is High, Medium, Low or No data. Questions about future behaviour
 ("would you pay for this?") are capped at Low, because online text holds

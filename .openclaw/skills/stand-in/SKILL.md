@@ -10,8 +10,10 @@ description: >
   the user asks for user interviews, customer discovery, synthetic or
   simulated users, persona interviews, audience research, "what would users
   think of X", validating a product idea or design with no research budget,
-  or /stand-in. Output is speculative and is labelled as such; it
-  produces hypotheses to test, not findings.
+  or /stand-in. Has two modes: Analysis, where the agent runs the whole
+  study and reports; and Roleplay, where the user asks the questions and
+  the agent answers as the interviewee. Output is speculative and is
+  labelled as such; it produces hypotheses to test, not findings.
 ---
 
 # Stand-in
@@ -71,6 +73,25 @@ has succeeded: it has told the user what to go and ask.
 
 Before giving any answer, check each factual claim in it against the
 evidence log. If you cannot point to the entry, cut the claim.
+
+## Two modes
+
+The skill runs in one of two modes. Both use the same evidence, the same
+panel and the same rules; they differ in who asks the questions.
+
+| | **Analysis** | **Roleplay** |
+| --- | --- | --- |
+| Who interviews | You do | The user does |
+| What the user does | Gives the brief, then reads the report | Asks questions as the interviewer, in conversation |
+| What you produce | The full report, in one run | In-character answers, one at a time, then the verify-in-person list |
+| Good for | A fast first pass on an idea | Practising an interview, or probing one persona in depth |
+
+Pick the mode from what the user says: "analyse", "research this", "run
+it", "give me a report" mean Analysis; "let me interview", "roleplay", "be
+the user", "I'll ask the questions" mean Roleplay. `/stand-in analysis …`
+and `/stand-in roleplay …` select it directly. If it is not clear, ask
+once, together with anything missing from the brief. The user can switch
+at any point: evidence and panel carry over.
 
 ## Workflow
 
@@ -134,24 +155,50 @@ age, gender, nationality or income drive opinions by stereotype. A persona
 is a composite of a segment; never model one on an identifiable real person,
 and never reuse a poster's username or personal details.
 
-Show the panel to the user and let them adjust it before interviewing.
+In Roleplay mode, show the panel and let the user adjust it before they
+start. In Analysis mode, carry on without stopping and include the panel in
+the report.
 
 ### 4. Run the interviews
 
-Offer two modes:
+**Analysis mode.** You do all of it. Draft a discussion guide from the
+research questions: open, non-leading, past behaviour before opinions, five
+to eight questions. Put every question to every persona, then go on to
+confidence and synthesis without pausing for approval. Once the brief is
+complete, do not check in again until the report is ready.
 
-- **Live**: the user asks questions and picks who answers, or asks the whole
-  panel.
-- **Auto**: you draft a discussion guide from the research questions (open,
-  non-leading, past behaviour before opinions), confirm it, then run it
-  across the panel.
+When subagents are available, give each persona its own agent with its card
+and only its grounding evidence, so that answers do not converge on a single
+voice. Otherwise answer each persona in turn and check that they are not
+echoing one another.
 
-When subagents are available and the panel runs in auto mode, give each
-persona its own agent with its card and only its grounding evidence, so that
-answers do not converge on a single voice. Otherwise answer each persona in
-turn and check that they are not echoing one another.
+**Roleplay mode.** The user is the interviewer and you are the interviewee.
 
-Every answer has three parts:
+- After showing the panel, ask who they want to talk to first, then become
+  that persona. Open with a line of introduction in character and wait for
+  their question.
+- Answer one question at a time, as that person would in a real interview:
+  conversational, in first person, of ordinary spoken length. Do not
+  volunteer a summary, list every source, or answer questions that were not
+  asked. Let the user lead and follow up.
+- Stay in character between questions. Do not coach the user on their
+  interviewing unless they ask for feedback.
+- Keep the evidence and confidence lines under every answer, kept short.
+  They are the out-of-character part and are never dropped, however
+  immersive the conversation becomes.
+- When the evidence does not cover a question, step out of character for
+  that answer and say "No data", then return to the persona for the next
+  question. A real interviewee would improvise here; a stand-in may not.
+- If the user asks a leading or hypothetical question, answer it under the
+  normal rules (from past behaviour, capped at Low). Do not reward a leading
+  question with the answer it fishes for.
+- The user can say "switch to <name>" to change persona, "ask everyone" to
+  put a question to the whole panel, and "end" or "wrap up" to finish.
+- When they finish, drop the persona and give the synthesis and the
+  verify-in-person list from step 6, built from the questions they actually
+  asked. Offer the saved report.
+
+**In both modes**, every answer has three parts:
 
 ```
 **Dana, 34, freelance bookkeeper** — "I stopped using it after the second
@@ -242,8 +289,8 @@ a start), and one to three questions to ask, phrased about past behaviour
 rather than hypothetical futures. Put the items that would be most costly
 to get wrong first.
 
-Give this list at the end of every session, including live sessions where
-the user never asks for a report. It is the main thing they take away: the
+Give this list at the end of every session, including Roleplay sessions
+where the user never asks for a report. It is the main thing they take away: the
 synthetic round exists to make a few real conversations sharply targeted,
 or to support an informed bet when even those are not possible.
 

@@ -8,6 +8,11 @@ The full instructions are in `skills/stand-in/SKILL.md`, with supporting
 files in `skills/stand-in/references/`. Read and follow them when they are
 available. If they are not, apply the rules below.
 
+- Work in one of two modes. **Analysis**: you write the questions,
+  interview the whole panel and deliver a report without stopping.
+  **Roleplay**: the user is the interviewer; you answer one question at a
+  time as the persona they chose, staying in character, until they end the
+  session. Ask which mode if it is not clear.
 - Say once, before the first answer and at the top of any report, that the
   participants are simulated, that online sources over-represent people who
   post and review, and that the results are hypotheses: better than working

@@ -65,5 +65,5 @@ def register(ctx: Any) -> None:
         COMMAND,
         _make_command_handler(ctx),
         description="Interview evidence-backed stand-ins for your target users.",
-        args_hint="[product, audience or research question]",
+        args_hint="[analysis|roleplay] [product, audience or research question]",
     )
