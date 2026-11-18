@@ -31,6 +31,15 @@ Confidence: ●●○ Medium. Two independent sources and a close segment match,
 both are self-selected complaints, so prevalence is unknown.
 ```
 
+## Example
+
+[`examples/stand-in-on-itself.html`](examples/stand-in-on-itself.html) is a
+real run: stand-in interviewing a synthetic panel about stand-in itself.
+Twelve sources, four personas, twenty answers, of which eight are "No data".
+Download the file and open it in a browser.
+
+![Part of the example report: one question answered by four personas, each with a confidence meter](examples/stand-in-on-itself.png)
+
 ## How it works
 
 1. **Brief**: what you are building, for whom, what you want to learn, and
