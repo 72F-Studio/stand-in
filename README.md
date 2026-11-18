@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.svg" width="96" alt="stand-in logo"></p>
+
 # stand-in
 
 Interviewing real people is expensive, slow, and often out of reach for small

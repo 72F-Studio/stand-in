@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+  <title id="t">stand-in</title>
+  <path fill="#F2613F" d="M36 16h56a24 24 0 0 1 24 24v32a24 24 0 0 1-24 24H58l-22 20V96a24 24 0 0 1-24-24V40a24 24 0 0 1 24-24z"/>
+  <circle cx="40" cy="56" r="9" fill="#fff"/>
+  <circle cx="64" cy="56" r="9" fill="#fff"/>
+  <circle cx="88" cy="56" r="7" fill="none" stroke="#fff" stroke-width="4"/>
+</svg>
