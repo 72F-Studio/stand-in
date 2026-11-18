@@ -106,6 +106,11 @@
   .dist .count { font-variant-numeric: tabular-nums; font-size: 0.875rem; color: var(--ink-2); }
   .dist .name { font-size: 0.875rem; }
 
+  .verify label { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; margin-bottom: 8px; cursor: pointer; }
+  .verify input { width: 18px; height: 18px; margin: 3px 0 0; flex: none; accent-color: var(--accent); }
+  .verify dl { margin-left: 28px; }
+  .verify:has(input:checked) label span { text-decoration: line-through; color: var(--ink-2); }
+
   .question { margin: 28px 0 10px; font-weight: 600; }
   .answer { border-left: 3px solid var(--line); padding: 2px 0 2px 14px; margin: 0 0 16px; }
   .answer .who { font-weight: 600; }
@@ -208,7 +213,6 @@
       "evidence": [1]
     }
   ],
-  "gaps": ["REPLACE: question that returned No data or only Low confidence"],
   "assumptions": [
     {
       "assumption": "REPLACE: belief that would hurt most if wrong",
@@ -216,9 +220,10 @@
       "confidence": "low"
     }
   ],
-  "realChecks": [
+  "verifyInPerson": [
     {
-      "assumption": "REPLACE: the assumption this checks",
+      "point": "REPLACE: point this round could not meaningfully find",
+      "why": "REPLACE: why it could not be settled (no data, low confidence, future behaviour, extrapolation, contradiction, segment not online)",
       "who": "REPLACE: who to talk to",
       "where": "REPLACE: where to find them",
       "questions": ["REPLACE: question about past behaviour"]
@@ -414,13 +419,6 @@
     });
   }
 
-  // Gaps
-  if (list(data.gaps).length) {
-    var gp = section("What we could not find");
-    gp.appendChild(el("p", { className: "muted small" }, "Where you are still working blind."));
-    gp.appendChild(bullets(data.gaps));
-  }
-
   // Assumptions
   if (list(data.assumptions).length) {
     var a = section("Riskiest assumptions");
@@ -431,15 +429,24 @@
     });
   }
 
-  // Real checks
-  if (list(data.realChecks).length) {
-    var rc = section("Check with real people");
-    data.realChecks.forEach(function (item) {
-      var dl = el("dl");
+  // Verify in person
+  if (list(data.verifyInPerson).length) {
+    var vp = section("Verify in person");
+    vp.appendChild(el("p", { className: "muted small" },
+      "What this round could not meaningfully find. " + data.verifyInPerson.length +
+      (data.verifyInPerson.length === 1 ? " point" : " points") +
+      " to check with real people, most costly to get wrong first."));
+    data.verifyInPerson.forEach(function (item, i) {
+      var id = "verify-" + i, dl = el("dl");
+      row(dl, "Why open", text(item.why));
       row(dl, "Who", text(item.who));
       row(dl, "Where", text(item.where));
       if (list(item.questions).length) row(dl, "Ask", bullets(item.questions));
-      rc.appendChild(el("div", { className: "card" }, el("h3", null, text(item.assumption)), dl));
+      vp.appendChild(el("div", { className: "card verify" },
+        el("label", { "for": id },
+          el("input", { type: "checkbox", id: id }),
+          el("span", null, text(item.point))),
+        dl));
     });
   }
 

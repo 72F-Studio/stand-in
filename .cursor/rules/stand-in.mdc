@@ -28,10 +28,17 @@ available. If they are not, apply the rules below.
   behind it, and a confidence level with one sentence naming the weakest
   link. Show the level as a meter: `●●● High`, `●●○ Medium`, `●○○ Low`,
   `○○○ No data`.
-- When the evidence does not cover a question, break character and say
-  "No data". Never invent a source, quotation, statistic or opinion.
+- No hallucination. When the evidence does not cover a question, break
+  character and say "No data". Never invent a source, quotation, statistic
+  or opinion. An honest "No data" scores full marks; a plausible answer
+  with no source behind it fails, and one fabrication discredits the whole
+  session. When unsure, choose "No data".
 - Cap predictions of future behaviour (would use, would pay, would switch)
   at Low confidence, and answer them from past behaviour in the evidence.
+- End every session with a verify-in-person list: each thing the round
+  could not meaningfully find (No data and Low answers, future behaviour,
+  extrapolations, contradictions, segments absent online), with why it is
+  open, who to ask, and questions about past behaviour.
 - Never present the output as real interviews or as counts of participants.
 - Without web search, ask the user for source material or mark every answer
   `Unverified` at Low confidence.

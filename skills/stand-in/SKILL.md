@@ -44,6 +44,34 @@ this in your own words:
 Say it once per session and once per report. Do not repeat it on every
 answer; the per-answer confidence line carries that weight.
 
+## The first rule: no hallucination
+
+Nothing may be invented and presented as evidence: no source, quotation,
+statistic, behaviour, preference or opinion. If the data does not exist, say
+that the data does not exist.
+
+Treat every answer as scored:
+
+| Answer | Score |
+| --- | --- |
+| Grounded in a cited source, with an honest confidence level | Full marks |
+| "No data", with what would answer the question | Full marks |
+| A plausible answer with no source behind it | Fails |
+| A fabricated source, quotation or number | Fails, and discredits the session |
+
+"No data" is never the weaker answer. It tells the user exactly where they
+are still blind, and it feeds the verify-in-person list in step 6. A single
+fabrication costs more than every good answer earns, because once one answer
+is invented the user cannot tell which of the others to trust.
+
+So when unsure, choose "No data" over a plausible guess, every time. Do not
+fill a silence to seem helpful, to keep a persona in character, or to make
+the panel feel complete. A session in which half the answers are "No data"
+has succeeded: it has told the user what to go and ask.
+
+Before giving any answer, check each factual claim in it against the
+evidence log. If you cannot point to the entry, cut the claim.
+
 ## Workflow
 
 ### 1. Take the brief
@@ -189,12 +217,35 @@ wrong.
 
 After the interviews, write a report following
 `references/report-template.md`. Lead with what bears on the user's
-decision. Separate what the evidence supports from what remains unknown, and
-finish with the cheapest way to check the riskiest assumptions with real
-people: usually three to five short conversations, with the questions
-already written. The point of the synthetic round is to make those few real
-conversations sharply targeted, or to make an informed bet when even those
-are not possible.
+decision, and separate what the evidence supports from what remains unknown.
+
+Then build the **verify-in-person list**: everything this round could not
+meaningfully find, turned into concrete points for the user to check with
+real people. Derive it from the session, not from a generic checklist. Go
+back through the interviews and the evidence log and add an item for:
+
+- every question that returned No data;
+- every Low-confidence answer that bears on the decision;
+- every question about future behaviour (would use, would pay, would
+  switch), since no online source can answer those;
+- every place you extrapolated to a demographic, region or segment the
+  sources did not show;
+- every point where sources or segments contradicted each other;
+- every segment you looked for and could not find online at all, such as
+  people who do not post, satisfied users, or non-users;
+- anything that text cannot show: what people actually do when observed,
+  how strongly they feel, what they would give up for it.
+
+For each item give the point to verify, why the round could not settle it,
+who to ask and where to find them (the communities in the evidence log are
+a start), and one to three questions to ask, phrased about past behaviour
+rather than hypothetical futures. Put the items that would be most costly
+to get wrong first.
+
+Give this list at the end of every session, including live sessions where
+the user never asks for a report. It is the main thing they take away: the
+synthetic round exists to make a few real conversations sharply targeted,
+or to support an informed bet when even those are not possible.
 
 When the user wants to keep or share the report, save it as a file with the
 full evidence log and links included, so that anyone can audit a claim:
@@ -210,7 +261,8 @@ full evidence log and links included, so that anyone can audit a claim:
 
 ## Integrity rules
 
-- Never fabricate a source, URL, quotation, statistic or study. Cite only
+- No hallucination, as set out in the first rule. Never fabricate a source,
+  URL, quotation, statistic or study. Cite only
   pages you retrieved in this session or material the user supplied. If a
   page could not be opened, cite it as a search-result snippet and treat it
   as weaker.

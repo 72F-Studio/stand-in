@@ -42,9 +42,9 @@ both are self-selected complaints, so prevalence is unknown.
    evidence, always including at least one sceptic.
 4. **Interview**: ask questions live, or let the agent run a discussion
    guide across the panel.
-5. **Report**: what the evidence suggests, what could not be found, the
-   riskiest assumptions, and a short script for checking them with three to
-   five real people. Saved as Markdown, or as a self-contained HTML page with
+5. **Report**: what the evidence suggests, the riskiest assumptions, and a
+   verify-in-person checklist of everything the round could not meaningfully
+   find, with who to ask and what to ask them. Saved as Markdown, or as a self-contained HTML page with
    drawn confidence meters and citations linked to the evidence log.
 
 Confidence is High, Medium, Low or No data. Questions about future behaviour
@@ -74,6 +74,13 @@ one uses.
 
 Then ask for it in plain words ("interview some users about my idea for…")
 or run `/stand-in`.
+
+## No hallucination
+
+The skill's first rule: if the data does not exist, the agent says the data
+does not exist. An honest "No data" counts as a full-marks answer; a
+plausible answer with no source behind it counts as a failure. Every gap
+then goes onto the verify-in-person list instead of being papered over.
 
 ## What it will not do
 

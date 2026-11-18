@@ -31,19 +31,21 @@ For each theme:
 - Where segments or sources disagree
 - Evidence: [n], [n]
 
-## What we could not find
-Questions that returned No data or only Low confidence. This section is as
-important as the themes: it marks where you are still working blind.
-
 ## Riskiest assumptions
 The beliefs that would hurt most if wrong, ranked by cost of being wrong
 against strength of evidence.
 
-## Check with real people
-The cheapest test for each risky assumption. Usually three to five short
-conversations: who to find, where to find them (the communities in the
-evidence log are a start), and the questions to ask. Ask about past
-behaviour, not hypothetical futures.
+## Verify in person
+A checklist of everything this round could not meaningfully find, derived
+from the session: No data answers, Low-confidence answers that bear on the
+decision, questions about future behaviour, extrapolations, contradictions,
+segments that could not be found online, and anything text cannot show.
+Most costly to get wrong first. For each item:
+
+- [ ] **The point to verify**
+  - Why this round could not settle it
+  - Who to ask, and where to find them
+  - One to three questions, about past behaviour
 
 ## Interview transcripts
 Question by question, each answer with its evidence and confidence lines.
@@ -85,9 +87,8 @@ including the warning banner. Rules for the JSON:
 | `findings[]` | `statement`, `confidence`, `reason`, `evidence` |
 | `panel[]` | `id`, `name`, `descriptor`, `segment`, `context`, `grounding`, `assumed` |
 | `themes[]` | `title`, `summary`, `confidence`, `reason`, `disagreement`, `evidence` |
-| `gaps[]` | Strings: questions with No data or only Low confidence |
 | `assumptions[]` | `assumption`, `why`, `confidence` |
-| `realChecks[]` | `assumption`, `who`, `where`, and a `questions` list |
+| `verifyInPerson[]` | `point`, `why` (why the round could not settle it), `who`, `where`, and a `questions` list; most costly to get wrong first |
 | `transcript[]` | `question` and `answers[]`, each with `persona` (a panel `id`), `answer`, `evidenceNote`, `evidence`, `confidence`, `reason` |
 | `evidence[]` | `n`, `source`, `url`, `date`, `type`, `speaker`, `signal`, `scale`, `retrieved` |
 | `limits[]` | Strings: the biases that apply to this evidence set |
