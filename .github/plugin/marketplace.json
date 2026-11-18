@@ -1,0 +1,18 @@
+{
+  "name": "stand-in",
+  "description": "Evidence-backed synthetic user interviews for researchers and designers.",
+  "owner": {
+    "name": "72F Studio"
+  },
+  "plugins": [
+    {
+      "name": "stand-in",
+      "description": "Role-plays a panel of interview participants whose answers are limited to public online evidence, each with sources and a confidence level.",
+      "source": "./",
+      "category": "productivity",
+      "tags": ["user-research", "interviews", "personas", "design"],
+      "commands": "commands/",
+      "skills": "skills/"
+    }
+  ]
+}

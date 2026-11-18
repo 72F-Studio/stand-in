@@ -1,0 +1,10 @@
+name: stand-in
+version: 0.1.0
+description: Evidence-backed synthetic user interviews for Hermes Agent, with a bundled skill and slash command.
+author: 72F Studio
+provides_hooks:
+  - pre_gateway_dispatch
+provides_commands:
+  - stand-in
+provides_skills:
+  - stand-in

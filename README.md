@@ -60,8 +60,14 @@ skill asks you to supply source material or marks everything as unverified.
 /plugin install stand-in@stand-in
 ```
 
-**Any agent that reads skills**: copy `skills/stand-in/` into the agent's
-skills directory (for Claude Code, `~/.claude/skills/`).
+**Other agents**: adapters ship for Codex, Gemini / Antigravity, GitHub
+Copilot and Copilot CLI, OpenCode, pi, Hermes, Devin, Cursor, Windsurf,
+Cline, Kiro, Swival, OpenClaw, and anything that reads `AGENTS.md`. See
+[docs/agent-portability.md](docs/agent-portability.md) for which files each
+one uses.
+
+**Manually**: copy `skills/stand-in/` into your agent's skills directory
+(for Claude Code, `~/.claude/skills/`).
 
 Then ask for it in plain words ("interview some users about my idea for…")
 or run `/stand-in`.

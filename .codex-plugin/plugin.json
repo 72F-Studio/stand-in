@@ -1,0 +1,25 @@
+{
+  "name": "stand-in",
+  "version": "0.1.0",
+  "description": "Evidence-backed synthetic user interviews: personas that answer only from public sources, with a confidence level on every claim.",
+  "author": {
+    "name": "72F Studio"
+  },
+  "license": "GPL-3.0-only",
+  "keywords": ["user-research", "interviews", "personas", "design", "codex"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Stand-in",
+    "shortDescription": "Interview evidence-backed stand-ins for your users.",
+    "longDescription": "Researches what a target audience says and does online, builds a panel of personas with different demographics from that evidence, and answers interview questions in character. Every answer cites its sources and a confidence level, and the output is labelled as speculative.",
+    "developerName": "72F Studio",
+    "category": "Productivity",
+    "capabilities": ["Instructions"],
+    "defaultPrompt": [
+      "Interview some stand-in users about my product idea.",
+      "What would my target audience think of this design?",
+      "Run a synthetic customer discovery round."
+    ],
+    "brandColor": "#1F2937"
+  }
+}

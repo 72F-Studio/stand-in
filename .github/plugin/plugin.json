@@ -1,0 +1,12 @@
+{
+  "name": "stand-in",
+  "description": "Evidence-backed synthetic user interviews: personas that answer only from public sources, with a confidence level on every claim.",
+  "version": "0.1.0",
+  "author": {
+    "name": "72F Studio"
+  },
+  "license": "GPL-3.0-only",
+  "keywords": ["user-research", "interviews", "personas", "design"],
+  "commands": "commands/",
+  "skills": "skills/"
+}

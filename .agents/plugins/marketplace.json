@@ -1,0 +1,20 @@
+{
+  "name": "stand-in",
+  "interface": {
+    "displayName": "Stand-in"
+  },
+  "plugins": [
+    {
+      "name": "stand-in",
+      "source": {
+        "source": "local",
+        "path": "../.."
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
